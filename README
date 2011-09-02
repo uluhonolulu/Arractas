@@ -1,0 +1,19 @@
+Arractas is designed to decouple the context from your tests, and encourage the Arrange-Act-Assert syntax
+
+Example:
+public class Customer_Named_John : BaseContextTest<OneCustomerNamedJohnContext> {
+    [Test]
+    public void ShouldBePreferred() {
+      Assert.IsTrue(Context.Customer.IsPreferred);
+    }
+}
+
+public class Customer_WhenSetNameToJohn : BaseCommandTest<OneCustomerContext> {
+    public override Act() {
+      Context.Customer.Name = "John";
+    }
+    [Test]
+    public void ShouldBecomePreferred() {
+      Assert.IsTrue(Context.Customer.IsPreferred);
+    }
+}
